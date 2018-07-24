@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +9,7 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-    Hello Python!
+    Restaurant Page!
+    <a href="{% url 'restaurant-sign-out' %}">Log out</a>
 </body>
 </html>
