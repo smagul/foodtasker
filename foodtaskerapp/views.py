@@ -19,7 +19,7 @@ def restaurant_sign_up(request):
     user_form = UserForm()
     restaurant_form = RestaurantForm()
 
-    if request.method == 'post':
+    if request.method == "POST":
         user_form = UserForm(request.POST)
         restaurant_form = RestaurantForm(request.POST, request.FILES)
 
@@ -30,7 +30,7 @@ def restaurant_sign_up(request):
             new_restaurant.save()
 
             login(request, authenticate(
-                username=user_form.cleaned_date['username'],
+                username=user_form.cleaned_data['username'],
                 password=user_form.cleaned_data['password']
             ))
 
