@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from foodtaskerapp import views
 from django.contrib.auth import views as auth_views
@@ -15,4 +15,9 @@ urlpatterns = [
         {'next_page': '/'}, name='restaurant-sign-out'),
     url(r'^restaurant/sign-up', views.restaurant_sign_up, name='restaurant_sign_up'),
     url(r'^restaurant/$', views.restaurant_home, name='restaurant-home'),
+
+    # Sign In/ Sign Up/ Sign Out
+    url(r'^api/social/', include('rest_framework_social_oauth2.urls')),
+    # /convert-token (sign in/ sign up)
+    # /revoke-token (sign out)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
