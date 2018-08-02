@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
     url(r'^restaurant/sign-in/$', auth_views.login,
-        {'template_name': 'restaurant/sign_in.html'}, name='restaurant-sign-in'),
+        {'template_name': 'restaurant/pages/sign_in.html'}, name='restaurant-sign-in'),
     url(r'^restaurant/sign-out', auth_views.logout,
         {'next_page': '/'}, name='restaurant-sign-out'),
     url(r'^restaurant/sign-up', views.restaurant_sign_up, name='restaurant_sign_up'),
