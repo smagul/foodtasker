@@ -12,7 +12,27 @@ def home(request):
 
 @login_required(login_url='/restaurant/sign-in/')
 def restaurant_home(request):
-    return render(request, 'restaurant/home.html', {})
+    return render(request, 'restaurant/main.html', {})
+
+
+@login_required(login_url='restaurant/sign-in')
+def restaurant_account(request):
+    return render(request, 'restaurant/pages/account.html', {})
+
+
+@login_required(login_url='restaurant/sign-in')
+def restaurant_meal(request):
+    return render(request, 'restaurant/pages/meal.html', {})
+
+
+@login_required(login_url='restaurant/sign-in')
+def restaurant_order(request):
+    return render(request, 'restaurant/pages/order.html', {})
+
+
+@login_required(login_url='restaurant/sign-in')
+def restaurant_report(request):
+    return render(request, 'restaurant/pages/report.html', {})
 
 
 def restaurant_sign_up(request):
@@ -36,7 +56,7 @@ def restaurant_sign_up(request):
 
             return redirect(restaurant_home)
 
-    return render(request, 'restaurant/sign_up.html', {
+    return render(request, 'restaurant/pages/sign_up.html', {
         'user_form': user_form,
         'restaurant_form': restaurant_form
     })
