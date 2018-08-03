@@ -1,5 +1,10 @@
-<p>Hi, {{ request.user }}</p>
-<hr>
+<div class="text-center">
+    <img src="{{ MEDIA_URL }}{{ request.user.restaurant.logo }}" class="img-circle" width="70" height="70">
+    <br>
+    <br>
+    <h4>Hi, {{ request.user.get_full_name }}</h4>
+    <h5>{{ request.user.restaurant.name }}</h5>
+</div>
 
 <a href="{% url 'restaurant-account' %}">Account</a>
 -
