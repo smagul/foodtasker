@@ -1,22 +1,20 @@
 {% extends 'restaurant/main.html' %}
 {% load bootstrap3 %}
 
-{% block title %}Account{% endblock %}
 
 {% block page %}
     <div class="col-lg-offset-2 col-lg-8">
         <div class="panel">
             <div class="panel-heading bg-blue">
                 <h4 class="panel-title text-center text-white">
-                    Account
+                    Add Meal
                 </h4>
             </div>
             <div class="panel-body">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% bootstrap_form user_form %}
-                    {% bootstrap_form restaurant_form %}
-                    {% bootstrap_button 'Update' button_type='submit' button_class='btn btn-pink' %}
+                    {% bootstrap_form form %}
+                    {% bootstrap_button 'Create' button_type='submit' button_class='btn btn-pink' %}
                 </form>
             </div>
         </div>
