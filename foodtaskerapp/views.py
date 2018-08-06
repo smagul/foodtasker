@@ -39,6 +39,11 @@ def restaurant_meal(request):
     return render(request, 'restaurant/pages/meal.html', {})
 
 
+@login_required(login_url='/restaurant/sign-in/')
+def restaurant_add_meal(request):
+    return render(request, 'restaurant/pages/add_meal.html', {})
+
+
 @login_required(login_url='restaurant/sign-in')
 def restaurant_order(request):
     return render(request, 'restaurant/pages/order.html', {})
