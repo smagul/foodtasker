@@ -8,7 +8,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    logo = models.ImageField(upload_to='restaurant_logo/', blank=False)
+    logo = models.ImageField(upload_to="restaurant_logo/", blank=False)
 
     def __str__(self):
         return self.name
@@ -35,10 +35,10 @@ class Driver(models.Model):
 
 
 class Meal(models.Model):
-    restaurant = models.ForeignKey(Restaurant, on_delete=None)
+    restaurant = models.ForeignKey(Restaurant, models.SET_NULL, blank=True, null=True)
     name = models.CharField(max_length=200)
     short_description = models.CharField(max_length=500)
-    image = models.ImageField(upload_to='meal_images', blank=False)
+    image = models.ImageField(upload_to="meal_images", blank=False)
     price = models.IntegerField(default=0)
 
     def __str__(self):
@@ -58,9 +58,9 @@ class Order(models.Model):
         (DELIVERED, "Delivered"),
     )
 
-    customer = models.ForeignKey(Customer, on_delete=None)
-    restaurant = models.ForeignKey(Restaurant, on_delete=None)
-    driver = models.ForeignKey(Driver, on_delete=None)
+    customer = models.ForeignKey(Customer, models.SET_NULL, blank=True, null=True)
+    restaurant = models.ForeignKey(Restaurant, models.SET_NULL, blank=True, null=True)
+    driver = models.ForeignKey(Driver, models.SET_NULL, blank=True, null=True)
     address = models.CharField(max_length=200)
     total = models.IntegerField()
     status = models.IntegerField(choices=STATUS_CHOICES)
@@ -72,8 +72,8 @@ class Order(models.Model):
 
 
 class OrderDetails(models.Model):
-    order = models.ForeignKey(Order, on_delete=None, related_name='order_details')
-    meal = models.ForeignKey(Meal, on_delete=None)
+    order = models.ForeignKey(Order, models.SET_NULL, related_name='order_details', null=True)
+    meal = models.ForeignKey(Meal, models.SET_NULL, blank=True, null=True)
     quantity = models.IntegerField()
     sub_total = models.IntegerField()
 
