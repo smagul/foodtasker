@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from foodtaskerapp.models import Restaurant
 
+
 class RestaurantSerializer(serializers.ModelSerializer):
     logo = serializers.SerializerMethodField()
 
