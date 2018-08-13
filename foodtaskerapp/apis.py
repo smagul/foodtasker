@@ -9,6 +9,10 @@ from foodtaskerapp.models import Restaurant, Meal, Order, OrderDetails
 from foodtaskerapp.serializers import RestaurantSerializer, MealSerializer, OrderSerializer
 
 
+###############
+# Customers
+###############
+
 def customer_get_restaurants(request):
     restaurants = RestaurantSerializer(
         Restaurant.objects.all().order_by("-id"),
@@ -98,8 +102,35 @@ def customer_get_latest_order(request):
     return JsonResponse({"order": order})
 
 
+###############
+# Restaurant
+###############
+
 def restaurant_order_notification(request, last_request_time):
     notification = Order.objects.filter(restaurant=request.user.restaurant,
                                         created_at__gt=last_request_time).count()
 
     return JsonResponse({"notification": notification})
+
+
+###############
+# Drivers
+###############
+def driver_get_ready_orders(request):
+    return JsonResponse({})
+
+
+def driver_pick_order(request):
+    return JsonResponse({})
+
+
+def driver_get_latest_order(request):
+    return JsonResponse({})
+
+
+def driver_complete_order(request):
+    return JsonResponse({})
+
+
+def driver_get_revenue(request):
+    return JsonResponse({})
