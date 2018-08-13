@@ -117,7 +117,12 @@ def restaurant_order_notification(request, last_request_time):
 # Drivers
 ###############
 def driver_get_ready_orders(request):
-    return JsonResponse({})
+    orders = OrderSerializer(
+        Order.objects.filter(status=Order.READY, driver=None).order_by("-id"),
+        many=True
+    ).data
+
+    return JsonResponse({"orders": orders})
 
 
 def driver_pick_order(request):
