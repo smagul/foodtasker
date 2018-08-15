@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.db.models import Sum
+from django.db.models import Sum, Count, Case, When
 
 from django.contrib.auth.models import User
-from .models import Meal, Order
+from .models import Meal, Order, Driver
 from .forms import UserForm, RestaurantForm, UserFormForEdit, MealForm
 
 
@@ -118,10 +118,25 @@ def restaurant_report(request):
         "data": [meal.total_order or 0 for meal in top3_meals]
     }
 
+    # Top 3 Drivers
+    top3_drivers = Driver.objects.annotate(
+        total_order=Count(
+            Case(
+                When(order__restaurant=request.user.restaurant, then=1)
+            )
+        )
+    ).order_by("-total_order")[:3]
+
+    driver = {
+        "labels": [driver.user.get_full_name() for driver in top3_drivers],
+        "data": [driver.total_order for driver in top3_drivers]
+    }
+
     return render(request, 'restaurant/pages/report.html', {
         "revenue": revenue,
         "orders": orders,
-        "meal": meal
+        "meal": meal,
+        "driver": driver
     })
 
 
